@@ -1,0 +1,15 @@
+{
+    "name": "imefisto/buttercup-protects-with-eventsauce",
+    "autoload": {
+        "psr-4": {
+            "Imefisto\\ButtercupProtectsWithEventsauce\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ignacio El Kadre",
+            "email": "ignacio@inek.com.ar"
+        }
+    ],
+    "require": {}
+}
