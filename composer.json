@@ -18,5 +18,8 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true
         }
+    },
+    "require": {
+        "eventsauce/eventsauce": "^3.4"
     }
 }
