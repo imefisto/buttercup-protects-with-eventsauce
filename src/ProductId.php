@@ -3,17 +3,12 @@ namespace Imefisto\ButtercupProtectsWithEventsauce;
 
 final class ProductId
 {
-    public function __construct(private string $id)
+    public function __construct(public readonly string $id)
     {
     }
 
-    public function equals(ProductId $id)
+    public function equals(ProductId $other)
     {
-        return (string) $id == $this->id;
-    }
-
-    public function __toString(): string
-    {
-        return $this->id;
+        return $other->id == $this->id;
     }
 }

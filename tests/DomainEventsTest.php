@@ -14,7 +14,7 @@ it(
     'should equal another instance with the same value',
     function () use ($event) {
         expect (
-            $event->getAggregateId()->equals(new BasketId('BAS1'))
+            $event->basketId->equals(new BasketId('BAS1'))
         )->toBeTrue();
     }
 );
@@ -23,7 +23,7 @@ it(
     'should expose a ProductId',
     function () use ($event) {
         expect (
-            $event->getProductId()->equals(new ProductId('PRO1'))
+            $event->productId->equals(new ProductId('PRO1'))
         )->toBeTrue();
     }
 );
@@ -31,7 +31,7 @@ it(
 it(
     'should expose a productName',
     function () use ($event) {
-        expect($event->getProductName())
+        expect($event->productName)
             ->toBe('The Princess Bride');
     }
 );

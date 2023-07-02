@@ -4,27 +4,9 @@ namespace Imefisto\ButtercupProtectsWithEventsauce;
 final class ProductWasAddedToBasket
 {
     public function __construct(
-        private BasketId $basketId,
-        private ProductId $productId,
-        private string $productName
+        public readonly BasketId $basketId,
+        public readonly ProductId $productId,
+        public readonly string $productName
     ) {
-        $this->basketId = $basketId;
-        $this->productName = $productName;
-        $this->productId = $productId;
-    }
-    
-    public function getAggregateId()
-    {
-        return $this->basketId;
-    }
-
-    public function getProductId()
-    {
-        return $this->productId;
-    }
-
-    public function getProductName()
-    {
-        return $this->productName;
     }
 }
