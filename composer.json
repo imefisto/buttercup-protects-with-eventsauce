@@ -20,6 +20,7 @@
         }
     },
     "require": {
-        "eventsauce/eventsauce": "^3.4"
+        "eventsauce/eventsauce": "^3.4",
+        "ramsey/uuid": "^4.7"
     }
 }
