@@ -6,6 +6,7 @@ use EventSauce\EventSourcing\AggregateRootBehaviour;
 
 final class Basket implements AggregateRoot
 {
+    private array $products = [];
     private int $productCount = 0;
 
     use AggregateRootBehaviour;
@@ -36,8 +37,6 @@ final class Basket implements AggregateRoot
                 $productName
             )
         );
-
-        ++$this->productCount;
     }
 
     private function guardProductLimit()
@@ -49,25 +48,46 @@ final class Basket implements AggregateRoot
 
     public function removeProduct(ProductId $productId): void
     {
+        if(! $this->productIsInBasket($productId)) {
+            return;
+        }
+        
         $this->recordThat(
             new ProductWasRemovedFromBasket(
                 $this->id,
                 $productId
             )
         );
+    }
 
-        --$this->productCount;
+    private function productIsInBasket(ProductId $productId): bool
+    {
+        return
+            array_key_exists((string) $productId, $this->products)
+            && $this->products[(string)$productId] > 0;
     }
 
     public function applyBasketWasPickedUp(BasketWasPickedUp $event)
     {
+        $this->product = [];
+        $this->productCount = 0;
     }
 
     public function applyProductWasAddedToBasket(ProductWasAddedToBasket $event)
     {
+        $productId = $event->productId;
+
+        if(!$this->productIsInBasket($productId)) {
+            $this->products[(string) $productId] = 0;
+        }
+
+        ++$this->products[(string) $productId];
+        ++$this->productCount;
     }    
 
     public function applyProductWasRemovedFromBasket(ProductWasRemovedFromBasket $event)
     {
+        --$this->products[(string) $event->productId];
+        --$this->productCount;
     }    
 }
