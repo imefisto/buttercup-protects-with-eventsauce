@@ -11,10 +11,6 @@ final class Basket implements AggregateRoot
 
     use AggregateRootBehaviour;
 
-    public function __construct(private BasketId $id)
-    {
-    }
-
     public static function pickUp(BasketId $id): self
     {
         $basket = new self($id);
@@ -32,7 +28,7 @@ final class Basket implements AggregateRoot
 
         $this->recordThat(
             new ProductWasAddedToBasket(
-                $this->id,
+                $this->aggregateRootId,
                 $productId,
                 $productName
             )
@@ -54,7 +50,7 @@ final class Basket implements AggregateRoot
         
         $this->recordThat(
             new ProductWasRemovedFromBasket(
-                $this->id,
+                $this->aggregateRootId,
                 $productId
             )
         );
